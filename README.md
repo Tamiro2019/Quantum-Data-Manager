@@ -18,6 +18,27 @@ This repository includes a jupyter notebook ([Data_Manager.ipynb](https://github
 * data_manager.py : main data managing file containing the methods to make and retrieve data into a dataframe.
 * user_func.py : user defined functions that are used by data_manager.py to construct simulation data.
 * Data_Manager.ipynb : jupyter notebook of the data_manager workflow and a mini-tutorial on using the dataframe.
+* requirements.txt : contains a list of all package and version requirements to run the data manager.
 
 ## Launch
 
+* Download this repository
+* Make sure to have [Anaconda](https://docs.anaconda.com/anaconda/install/) installed
+* Open a terminal
+* In the terminal, type the following to create a conda environment: $ conda create -n qdm_env python=3.6 
+* Acticate conda environment: $ conda activate qdm_env
+
+Easy way
+* Install pip in this environment: $ conda install pip
+* Tell pip to install all the requirements: $ pip install -r requirements.txt
+
+Alternatively install the requirements manually within the qdm_env environment
+* Install numpy: $ conda install numpy
+* Install scipy: $ conda install scipy
+* Install pandas: $ conda install pandas
+* Install quspin: $ conda install -c weinbe58 quspin
+
+To run the jupyter notebook:
+* Install jupyter in this environment: $ conda install jupyter
+* Run: $ jupyter notebook
+* Open Data_Manager.ipynb
