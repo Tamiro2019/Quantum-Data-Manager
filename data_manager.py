@@ -43,10 +43,16 @@ def make_data( vs=0, L=8, g_id_list=[0] , param_labels = ['alpha','beta', 'gamma
     
     
     if write == True:
+        
+        # make directory in current folder, if one does not already exist
+        
         if not os.path.exists( dir_path+'/Sim_Data/'):
             os.makedirs( dir_path+'/Sim_Data/')
 
         front = dir_path+'/Sim_Data/'
+        
+        
+        # tuple of paramter labels to be used below
         
         lab_tup = tuple(param_labels)
     
@@ -59,6 +65,8 @@ def make_data( vs=0, L=8, g_id_list=[0] , param_labels = ['alpha','beta', 'gamma
     
     basis = spin_basis_1d(L, pauli=False, S= "1/2")
     
+    # loop over all system configuration
+        
     for g_id in g_id_list: # loop over realizations: relevant e.g. for disordered systems:
         
         for x in looper: # loop over all parameter combinations
@@ -71,7 +79,7 @@ def make_data( vs=0, L=8, g_id_list=[0] , param_labels = ['alpha','beta', 'gamma
 
             for q in Qs: # loop over all quantity/observable requests
 
-                qfunc = q + '_func'
+                qfunc = q + '_func' # name of user func defition 
                 #print(qfunc)
 
                 try: # try to evaluate user defined function
@@ -79,7 +87,7 @@ def make_data( vs=0, L=8, g_id_list=[0] , param_labels = ['alpha','beta', 'gamma
                     if exact_diag == True:
 
                         try:
-                            Qvalue = globals()[qfunc](L,basis,x,H,E,V) # look for local function with name q and call it
+                            Qvalue = globals()[qfunc](L,basis,x,H,E,V) # look for global function with name q and call it
                         except ValueError: 
                             print("Oops! looks like you defined "+ qfunc+"to have different inputs than (L,basis,x,H,E,V).\
                             Maybe exact_diag needs to be set properly.")
@@ -92,7 +100,7 @@ def make_data( vs=0, L=8, g_id_list=[0] , param_labels = ['alpha','beta', 'gamma
                     else:
 
                         try: 
-                            Qvalue = globals()[qfunc](L,basis,x,H) # look for local function with name q and call it
+                            Qvalue = globals()[qfunc](L,basis,x,H) # look for global function with name q and call it
                         except ValueError: 
                             print("Oops! looks like you defined " + qfunc + "to have different inputs than (L,basis,x,H).\
                             Maybe exact_diag needs to be set properly.")
@@ -121,14 +129,18 @@ def retrieve_data(vs=0, L_list=[8], g_id_list=[0] , param_labels = ['alpha','bet
     retrieve_data() assembles this data into a single dataframe.  
     '''
     
-    
+    # path to folder
     front = dir_path+'/Sim_Data/'
+    
+    # make tuple of parameter labels
     lab_tup = tuple(param_labels)
     
+    # build data frame columns
     df_cols = ['L','g_id'].copy()
     df_cols.extend(param_labels)
     df_cols.extend(Qs)
     #print(df_cols)
+    
     df = pd.DataFrame(columns = df_cols ) # make data frame
     
     # extend parameter list for looper
@@ -149,16 +161,23 @@ def retrieve_data(vs=0, L_list=[8], g_id_list=[0] , param_labels = ['alpha','bet
         
         tail = '_vs='+str(vs) +'_L='+ str(L)+'_gid='+str(g_id) + '_' + str(lab_tup) + '='+ str(x)+ '.txt'
 
+        # set dictionary to be used below for generating the rows of the dataframe
         row_tuples = [('L',L),('g_id',g_id)]
         row_tuples.extend(zip(param_labels,x))
         row_dict = dict(row_tuples)
 
-        for name in Qs:
+        for name in Qs: # loop over quantities
 
+            # load data
             filename = front + name + tail
             Q = np.loadtxt(filename) # quantity vector
+            
+            # add entries to row dictionary for every quantity name
             row_dict[name]= Q
 
+        # row_dict is now complete.
+        
+        # fill the next row of the data frame
         df = df.append(row_dict, ignore_index=True) 
 
             
@@ -167,7 +186,7 @@ def retrieve_data(vs=0, L_list=[8], g_id_list=[0] , param_labels = ['alpha','bet
 
 if __name__ == "__main__":
     
-    L_list = [7] #[5,6,7,8,9,10]
+    L_list = [5,6,7,8] 
     for l in L_list :
         make_data(vs = 1, L=l, g_id_list=[-1])
 
