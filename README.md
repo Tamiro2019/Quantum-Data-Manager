@@ -7,7 +7,7 @@ substantial amount of time trying to organize their output data. Therefore, it i
 
 The quantum data manager system provides a simple program to organize large simulation data into files, and retrieve the data into a [pandas](https://pandas.pydata.org/pandas-docs/stable/) dataframe for easy management. This system allows the user to modify or create python functions that set up a physical system of interest (through a Hamiltonian operator) and compute outputs (such as physical properties or observables). There is no restriction on the class of Hamiltonian models, or the simulation outputs, as long as they can be reasonably computed and the user has enough storage space for the output data. 
 
-The default setup of the quantum data manager also provides an example quantum model, with some basic sets of parameters and outputs, to showcase the system's workflow. These examples use [quspin package](http://weinbe58.github.io/QuSpin/) to quickly and effectively construct physical operators common in quantum mechanics. 
+The default setup of the quantum data manager also provides an example quantum model, with some basic sets of parameters and outputs, to showcase the system's workflow. These examples use the [quspin package](http://weinbe58.github.io/QuSpin/) to quickly and effectively construct physical operators common in quantum mechanics. 
 
 This repository includes a jupyter notebook ([Data_Manager.ipynb](https://github.com/Tamiro2019/Quantum-Data-Manager/blob/master/Data_Manager.ipynb)) which walks through the workflow of the data manager system, and in addition, gives a mini-tutorial on how to use the resulting dataframe for basic plotting and exploratory analysis.
 
