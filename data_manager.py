@@ -67,9 +67,10 @@ def make_data( vs=0, L=8, g_id_list=[0] , param_labels = ['alpha','beta', 'gamma
     
     # loop over all system configuration
         
-    for g_id in g_id_list: # loop over realizations: relevant e.g. for disordered systems:
+    
         
-        for x in looper: # loop over all parameter combinations
+    for x in looper: # loop over all parameter combinations
+        for g_id in g_id_list: # loop over realizations: relevant e.g. for disordered systems:
 
             H = H_mapper(L, basis, x) # extract Hamiltonian (array or obj) using user-defined function 
 
@@ -182,7 +183,6 @@ def retrieve_data(vs=0, L_list=[8], g_id_list=[0] , param_labels = ['alpha','bet
 
             
     return df
-
 
 if __name__ == "__main__":
     
