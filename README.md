@@ -8,7 +8,7 @@ The quantum data manager system provides a simple program to organize large simu
 
 The default setup of the Quantum Data Manager also provides an example quantum model, with some basic sets of parameters and outputs, to showcase the system's workflow. These examples use the [quspin package](http://weinbe58.github.io/QuSpin/) to quickly and effectively construct physical operators common in quantum mechanics. 
 
-This repository includes a jupyter notebook ([Data_Manager.ipynb](https://github.com/Tamiro2019/Quantum-Data-Manager/blob/master/Data_Manager.ipynb)) which walks through the workflow of the data management system, and in addition, gives a mini-tutorial on how to use the resulting dataframe for basic plotting and exploratory analysis.
+This repository includes a jupyter notebook ([Data_Manager.ipynb](https://github.com/Tamiro2019/Quantum-Data-Manager/blob/master/Data_Manager.ipynb)) which walks through the workflow of the management system, and in addition, gives a mini-tutorial on how to use the resulting dataframe for basic plotting and exploratory analysis.
 
 ## Key Files
 
